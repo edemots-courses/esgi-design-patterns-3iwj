@@ -11,19 +11,30 @@ class FictionBook implements Book
     protected string $author;
 
     protected string $lang;
+
+    protected string $isbn;
+
+    protected string $date;
     
-    public function __construct(string $title, string $author, string $lang)
-    {
+    public function __construct(
+        string $title, 
+        string $author, 
+        string $lang, 
+        string $isbn, 
+        string $date
+    ) {
         $this->title = $title;
         $this->author = $author;
         $this->lang = $lang;
+        $this->isbn = $isbn;
+        $this->date = $date;
     }
 
     public function getDetails(): string 
     {
         return match ($this->lang) {
-            "fr" => "{$this->title} écrit par {$this->author}.",
-            "en" => "{$this->title} written by {$this->author}.",
+            "fr" => "{$this->title} ({$this->isbn}) écrit par {$this->author} en {$this->date}.",
+            "en" => "{$this->title} ({$this->isbn}) written by {$this->author} in {$this->date}.",
             default => throw new Exception("Unknown language {$this->lang}."),
         };
     }
