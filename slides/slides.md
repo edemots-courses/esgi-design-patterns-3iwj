@@ -644,7 +644,6 @@ Si l'on souhaite ajouter des fonctionnalités cumulables à notre objet.
 
 ---
 
-
 <div class="h-full grid content-center my-16">
 
 ## TP 2
@@ -661,9 +660,9 @@ Si l'on souhaite ajouter des fonctionnalités cumulables à notre objet.
 
 <div class="my-8">
 
-- Si ce n'est pas déjà le cas, ajoutez un attribut `price` à votre classe Book.
-- Créez une interface `EBook` avec une méthode `getPrice()` pour les livres électroniques.
-- Implémentez une classe `EBookAdapter` qui adapte la classe `Book` pour fonctionner avec des livres électroniques. Cette classe devrait implémenter l'interface `EBook` et utiliser la classe `Book` pour obtenir le prix.
+- Si ce n'est pas déjà le cas, ajoutez un attribut `price` à votre classe Book et son getter.
+- Créez une interface `EBook` avec une méthode `getOnlinePrice()` pour les livres électroniques.
+- Implémentez une classe `EBookAdapter` qui adapte la classe `Book` pour la transformer en livre électronique. Cette classe devrait implémenter l'interface `EBook` et utiliser la classe `Book` pour obtenir le prix.
 
 </div>
 
@@ -705,28 +704,28 @@ Si l'on souhaite ajouter des fonctionnalités cumulables à notre objet.
 
 ---
 
-## TP 2 (facade)
+## TP 2.1 (facade)
 
-<div class="my-16 columns gap-16">
-<div>
-<small>
+<div class="my-16">
 
-- Créez une classe `Library`.
-- Créez une méthode `getBook()` qui prendra en paramètre un titre, l'âge du client, si le client veut un e-book et si il a le droit à une remise.
+- Créez une classe abstraite `Librarian` qui utilisera le pattern `Singleton`.
+- Faites en sortes que votre `Librarian` contienne un attribut `booksByCategory` représentant les livres de la librairie ordonnés par catégories
 
-</small>
 </div>
-<div>
-<small>
 
+---
+
+## TP 2.2 (facade)
+
+<div class="my-8">
+
+- Créez une méthode `getBook()` qui prendra en paramètre un titre, l'âge du client, si le client veut un e-book et si il a le droit à une remise.
 - Dans la méthode `getBook()`, 
   + Cherchez le livre grâce à son titre dans la liste créée (`BookCategory`)
   + vérifiez que le client à l'âge requis pour le lire
   + transformez le livre en e-book si nécessaire
   + appliquez une réduction si il y est éligible.
 
-</small>
-</div>
 </div>
 
 ---
@@ -736,6 +735,206 @@ Si l'on souhaite ajouter des fonctionnalités cumulables à notre objet.
 <div class="my-16 h-full grid items-center">
 
 ## <!-- fit --> Patrons comportementaux
+
+</div>
+
+---
+
+##  Observer
+
+<!-- Analogie: Le facteur ne distribue des magazines qu'à ceux qui ont choisi de le recevoir (abonnement Picsou magazine) -->
+
+<div class="my-16">
+<div>
+
+- Permet de notifier des objets qu'un évènement qu'ils observent a eu lieu
+
+</div>
+<div>
+
+--
+#### Use case
+
+Lorsque que vous voulez que la modification de l'état d'un objet en impact d'autres, sans que vous les connaissiez à l'avance et qu'ils puissent changer dynamiquement.
+
+</div>
+</div>
+
+---
+
+##  Observer
+
+<div class="text-center h-full my-8">
+
+![h:420](./themes/images/observer/observer-uml.png)
+
+</div>
+
+---
+
+##  Strategy
+
+<!-- Analogie: Différents moyens de transports pour aller de A à B (vélo: long/peu coûteux; bus: moyennement long/moyennement coûteux; voiture: rapide/coûteux) -->
+
+<div class="my-16">
+<div>
+
+- Permet de définir des familles d'algorithmes dans des classes différentes et de rendre leurs objets intérchangeables. 
+
+</div>
+<div>
+
+--
+#### Use case
+
+Lorsque vous voulez avoir différentes variantes d'un algorithme dans un objet et que vous voulez passer d'un algo à un autre à l'éxécution.
+
+</div>
+</div>
+
+---
+
+##  Strategy
+
+<div class="text-center h-full my-8">
+
+![h:420](./themes/images/strategy/strategy-uml.png)
+
+</div>
+
+---
+
+##  Command
+
+<!-- Analogie: Le ticket de commande d'un restaurant -->
+
+<div class="my-4">
+<div>
+
+- Permet de transformer une action en objet contenant les détails de cette action
+- Permet de planifier, mettre en file d'attente ou annuler des opérations.
+
+</div>
+<div>
+
+--
+#### Use case
+
+- Lorsque qu'on souhaite planifier, mettre en file d'attente, éxécuter à distance ou rendre réversible une action.
+
+</div>
+</div>
+
+---
+
+##  Command
+
+<div class="text-center h-full my-8">
+
+![h:420](./themes/images/command/command-uml.png)
+
+</div>
+
+---
+
+##  Chain of responsibility
+
+<!-- Analogie: Un support technique qui vous renvoie à travers plusieurs services avant que vous ne trouviez le bon -->
+
+<div class="my-16">
+<div>
+
+- Permet de faire circuler une demande parmi une chaîne de "manipulateurs".
+- Ces manipulateurs peuvent traiter la demande, la passer au suivant ou couper court à la chaîne.
+
+</div>
+<div>
+
+--
+#### Use case
+
+Lorsque que vous voulez effectuer certaines opérations et/ou vérifications sur un objet dans un ordre donné.
+
+</div>
+</div>
+
+---
+
+##  Chain of responsibility
+
+<div class="text-center h-full my-8">
+
+![h:420](./themes/images/chain_of_responsibility/cor-uml.png)
+
+</div>
+
+---
+
+<div class="h-full grid content-center my-16">
+
+## TP 3
+
+### behavioral design patterns
+
+![bg right:33%](https://picsum.photos/1280/720?random=6)
+
+</div>
+
+---
+
+## TP 3 (Command)
+
+<div class="my-16">
+
+- Créez une interface `LibraryCommand` avec une méthode `execute()` pour éxécuter des commandes sur les livres.
+- Implémentez des classes concrètes à partir de l'interface `LibraryCommand` pour emprunter (`BorrowBookCommand`) et retourner (`ReturnBookCommand`) des livres.
+
+<small>
+
+> (Faites les changements nécessaires dans les classes impactées)
+
+</small>
+
+</div>
+
+---
+
+## TP 3 (Chain of responsibility)
+
+<div class="my-8">
+
+- Créez une interface `LibraryHandler` avec une méthode `handleRequest()` pour gérer les demandes de livres.
+- Implémentez des classes concrètes de "manipulateurs" qui traitent les demandes en fonction de leur paramètres :
+    1. `AvailableBookHandler`
+    2. `RequiredAgeBookHandler`
+
+</div>
+
+---
+
+## TP 3 (Strategy)
+
+<div class="my-8">
+
+- Créez une interface `BookSortingStrategy` avec une méthode `sort()` pour trier les livres.
+- Implémentez des classes concrètes de stratégie pour trier les livres dans leur catégorie selon certains critères :
+    1. `TitleSortingStrategy`
+    2. `AuthorSortingStrategy`
+    3. `PriceSortingStrategy`
+
+</div>
+
+---
+
+## TP 3 (Observer)
+
+<div class="my-8">
+
+- Créez une classe `LibraryPublisher` qui informera les abonnés des évènements suivants :
+    - `book:added`
+    - `book:returned`
+- Créez une interface `LibrarySubscriber` avec une méthode `notify()`.
+- Implémentez les classes concrète de `LibrarySubscriber` pour notifier (affichez simplement dans la console) les abonnés qu'un évènement a eu lieu.
 
 </div>
 

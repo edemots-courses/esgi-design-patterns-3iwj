@@ -55,14 +55,14 @@ class BookBuilder
 
     public function french()
     {
-        $this->lang = "fr";
+        $this->lang = "fr-FR";
 
         return $this;
     }
 
     public function english()
     {
-        $this->lang = "en";
+        $this->lang = "en-GB";
 
         return $this;
     }
@@ -77,8 +77,8 @@ class BookBuilder
     public function build(): Book
     {
         $factory = match ($this->lang) {
-            "fr" => new FrenchBookFactory(),
-            "en" => new EnglishBookFactory(),
+            "fr-FR" => new FrenchBookFactory(),
+            "en-GB" => new EnglishBookFactory(),
             default => throw new Exception("Language {$this->lang} not supported."),
         };
 

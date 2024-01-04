@@ -33,8 +33,8 @@ class FictionBook implements Book
     public function getDetails(): string 
     {
         return match ($this->lang) {
-            "fr" => "{$this->title} ({$this->isbn}) écrit par {$this->author} en {$this->date}.",
-            "en" => "{$this->title} ({$this->isbn}) written by {$this->author} in {$this->date}.",
+            "fr-FR" => "{$this->title} ({$this->isbn}) écrit par {$this->author} en {$this->date}.",
+            "en-GB" => "{$this->title} ({$this->isbn}) written by {$this->author} in {$this->date}.",
             default => throw new Exception("Unknown language {$this->lang}."),
         };
     }

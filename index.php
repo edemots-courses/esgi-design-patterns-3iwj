@@ -2,9 +2,12 @@
 
 require_once "./vendor/autoload.php";
 
-use DesignPatterns\TP1\BookBuilder;
-use DesignPatterns\TP1\EnglishBookFactory;
-use DesignPatterns\TP1\FrenchBookFactory;
+use DesignPatterns\TP2\Library;
+use DesignPatterns\TP2\BookBuilder;
+use DesignPatterns\TP2\BookCategory;
+use DesignPatterns\TP2\DiscountedBook;
+use DesignPatterns\TP2\Librarian;
+use DesignPatterns\TP2\PegiProxy;
 
 /*
 $frBookFactory = new FrenchBookFactory();
@@ -16,44 +19,9 @@ $frHistoryBook = $frBookFactory->createHistoryBook("Sapiens", "Un nom compliqué
 $enHistoryBook = $enBookFactory->createHistoryBook("Sapiens", "A complicated name");
 */
 
-$frFictionBook = (new BookBuilder())
-    ->french()
-    ->fictional()
-    ->title("Le Seigneur Des Anneaux")
-    ->author("J.R. Tolkien")
-    ->isbn("1234567890")
-    ->writtenAt("1999")
-    ->build();
-$enFictionBook = (new BookBuilder())
-    ->english()
-    ->fictional()
-    ->title("The Lord Of The Ring")
-    ->author("J.R. Tolkien")
-    ->isbn("1234567899")
-    ->writtenAt("1999")
-    ->build();
-
-$frHistoryBook = (new BookBuilder())
-    ->french()
-    ->historical()
-    ->title("SAPIENS")
-    ->author("Quelqu'un")
-    ->isbn("0987654321")
-    ->writtenAt("2010")
-    ->build();
-$enHistoryBook = (new BookBuilder())
-    ->english()
-    ->historical()
-    ->title("SAPIENS")
-    ->author("Someone")
-    ->isbn("0987654322")
-    ->writtenAt("2010")
-    ->build();
-
-echo "/// FRANÇAIS ///\n";
-echo "- {$frFictionBook->getDetails()}".PHP_EOL;
-echo "- {$frHistoryBook->getDetails()}".PHP_EOL;
-
-echo "/// ANGLAIS ///\n";
-echo "- {$enFictionBook->getDetails()}".PHP_EOL;
-echo "- {$enHistoryBook->getDetails()}".PHP_EOL;
+try {
+    $book = Librarian::getBook("Harry Potter et la coupe de feu", 7, true);
+    echo "Here is {$book->getDetails()}";
+} catch (Throwable $th) {
+    echo $th->getMessage();
+}
